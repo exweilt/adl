@@ -167,6 +167,33 @@ def getCoverUrl(playlistId):
 
 # print(yt.video_urls)
 
+# Shell Command
+def execute_command(command):
+    process = subprocess.Popen(
+        command,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True
+    )
+
+    while True:
+        output = process.stdout.readline()
+        error = process.stderr.readline()
+
+        if output == '' and error == '' and process.poll() is not None:
+            break
+
+        if output:
+            print(f"Output: {output.strip()}")
+
+        if error:
+            red(f"Error: {error.strip()}")
+            exit(1)
+
+
+    return process.poll()
+
 def download_song(video_url, folder_path, idx):
     fetch_opts = {
         'quiet': True,  # Suppress console output
@@ -196,17 +223,20 @@ def download_song(video_url, folder_path, idx):
     # command_str = f'yt-dlp -f 141 -o "song" "{video_url}"'
 
     # Hotfix - yt-dlp cant download from music.youtube with ydl.download (music.youtube is needed because of 141 format 256kbs)
-    command_str = f'yt-dlp -f 141 -o "{folder_path}/{idx}. {song_title}.raw" "{video_url}" --cookies="{COOKIES_FILE}"'
-    process = subprocess.Popen(command_str, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    command_str = f'yt-dlp -f 141 -o "{folder_path}/{idx}. {song_title}.raw" "{video_url}" --cookies="{COOKIES_FILE}" --quiet'
 
-    # Capture the output
-    stdout, stderr = process.communicate()
+    execute_command(command_str)
 
-    #print(stdout.decode())
-    if stderr:
-        red("Errors:")
-        print(stderr.decode())
-        sys.exit()
+    # process = subprocess.Popen(command_str, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+
+    # # Capture the output
+    # stdout, stderr = process.communicate()
+
+    # #print(stdout.decode())
+    # if stderr:
+    #     red("Errors:")
+    #     print(stderr.decode())
+    #     sys.exit()
 
     green(f'{idx}. {song_title} downloaded')
 
@@ -236,7 +266,8 @@ def dl_playlist(playlist_url, playlist_name, artist, genre):
     info (f"Downloading {playlist_name} [{len(video_urls)} songs]\n")
     if video_urls:
         for idx, url in enumerate(video_urls, start=1):
-            red(url)
+            url = "https://music.youtube.com/watch?v=" + url.split("watch?v=")[1]
+            # red(url)
             download_song(url, album_path, idx)
     else:
         red("No videos found in the playlist.")
@@ -264,7 +295,7 @@ if __name__ == "__main__":
                 continue
 
             if not exists(f'{MUSIC_DIR}/{line[0]}/.done'):
-                dl_playlist(f'https://music.youtube.com/playlist?list={line[1]}', line[0], cur_artist, cur_genre)
+                dl_playlist(f'https://www.youtube.com/playlist?list={line[1]}', line[0], cur_artist, cur_genre)
             else:
                 green(f"{line[0]} is already downloaded.")
 
