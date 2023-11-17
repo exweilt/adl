@@ -10,7 +10,9 @@ from time import sleep
 import os
 import subprocess
 import sys
-
+from PIL import Image
+from mutagen.mp4 import MP4, MP4Cover
+import io
 import yt_dlp
 
 # eyed3.log.setLevel("ERROR")
@@ -139,33 +141,35 @@ def getCoverUrl(playlistId):
 #     sleep(15)
 
 
-# def interpreteList():
-#     with open(LIST_FILE, 'r') as reader:
-#         lines = reader.read().split('\n')
-#         curArtist = "Unknown"
-#         curGenre = "Unknown"
-#         for linetext in lines:
-#             line = linetext.split(' ')
-#             if line[0] == '' or linetext[0] == '"':
-#                 continue
-#             if line[0] == "#":
-#                 curArtist = ' '.join(line[1:])
-#                 continue
-#             if line[0] == "@":
-#                 curGenre = ' '.join(line[1:])
-#                 continue
-#             if not exists(f'{MUSIC_DIR}/{line[0]}/.done'):
-#                 dlPlaylist(line, curArtist, curGenre)
-#             else:
-#                 green(f"{line[0]} is already downloaded.")
 
 
 
-# interpreteList()
 
-# yt = Playlist("https://music.youtube.com/playlist?list=OLAK5uy_nQaTI4Z5dutP0hjCfkm8RUcf7y6cWvQXE")
+def process_song(filename, album_id, artist_name, album_name, genre, title, year, track_number, total_tracks):
+    cover = urlopen(getCoverUrl(album_id)).read()
+    image = Image.open(io.BytesIO(cover))
 
-# print(yt.video_urls)
+    with io.BytesIO() as output:
+        image.save(output, format="JPEG")
+        image_bytes = output.getvalue()
+
+    audio_file = MP4(filename)
+
+    audio_file['covr'] = [
+        MP4Cover(image_bytes, imageformat=MP4Cover.FORMAT_JPEG)
+    ]
+
+    # Set the artist, album name, and genre
+    audio_file['\xa9ART'] = artist_name  # '\xa9ART' is the tag for the artist
+    audio_file['\xa9alb'] = album_name  # '\xa9alb' is the tag for the album
+    audio_file['\xa9gen'] = genre      # '\xa9gen' is the tag for the genre
+    audio_file['\xa9nam'] = title        # '\xa9nam' is the tag for the title
+    audio_file['\xa9day'] = year      # '\xa9day' is the tag for the release date
+    audio_file['trkn'] = [(track_number, total_tracks)]  # 'trkn' is the tag for the track number
+
+    audio_file.save()
+
+    pass
 
 # Shell Command
 def execute_command(command):
@@ -211,32 +215,14 @@ def download_song(video_url, folder_path, idx):
     ydl_opts = {
         'quiet': True,         # Suppress output
         'cookiefile': COOKIES_FILE,
-        # 'extractaudio': True,
         'format': '141',
         # 'format': 'bestaudio/best[ext=m4a]',
-        'outtmpl': f"{folder_path}/{idx}. {song_title}.raw",
+        'outtmpl': f"{folder_path}/{idx}. {song_title}.m4a",
     }
-
-    # with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    #     ydl.download([video_url])
-    
-    # command_str = f'yt-dlp -f 141 -o "song" "{video_url}"'
 
     # Hotfix - yt-dlp cant download from music.youtube with ydl.download (music.youtube is needed because of 141 format 256kbs)
     command_str = f'yt-dlp -f 141 -o "{folder_path}/{idx}. {song_title}.raw" "{video_url}" --cookies="{COOKIES_FILE}" --quiet'
-
     execute_command(command_str)
-
-    # process = subprocess.Popen(command_str, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-
-    # # Capture the output
-    # stdout, stderr = process.communicate()
-
-    # #print(stdout.decode())
-    # if stderr:
-    #     red("Errors:")
-    #     print(stderr.decode())
-    #     sys.exit()
 
     green(f'{idx}. {song_title} downloaded')
 
@@ -267,8 +253,8 @@ def dl_playlist(playlist_url, playlist_name, artist, genre):
     if video_urls:
         for idx, url in enumerate(video_urls, start=1):
             url = "https://music.youtube.com/watch?v=" + url.split("watch?v=")[1]
-            # red(url)
             download_song(url, album_path, idx)
+            process_song()
     else:
         red("No videos found in the playlist.")
         return
@@ -279,58 +265,28 @@ def dl_playlist(playlist_url, playlist_name, artist, genre):
 
 
 if __name__ == "__main__":
-    with open(LIST_FILE, 'r') as reader:
-        lines = reader.read().split('\n')
-        cur_artist = "Unknown"
-        cur_genre = "Unknown"
-        for linetext in lines:
-            line = linetext.split(' ')
-            if line[0] == '' or linetext[0] == '"':
-                continue
-            if line[0] == "#":
-                cur_artist = ' '.join(line[1:])
-                continue
-            if line[0] == "@":
-                cur_genre = ' '.join(line[1:])
-                continue
+    process_song(f'{MUSIC_DIR}/TOHO_BOSSA_NOVA_1/1. furifuri ojousama.m4a', album_id="OLAK5uy_l06YRyzdC4euFmkFiE8zujhFvyVv2GZTQ", artist_name="ShibayanRecords", album_name="TOHO BOSSA NOVA 1", genre="Bossa Nova", title="furifuri ojousama", track_number=1, total_tracks=10, year="2012")
+    # with open(LIST_FILE, 'r') as reader:
+    #     lines = reader.read().split('\n')
+    #     cur_artist = "Unknown"
+    #     cur_genre = "Unknown"
+    #     for linetext in lines:
+    #         line = linetext.split(' ')
+    #         if line[0] == '' or linetext[0] == '"':
+    #             continue
+    #         if line[0] == "#":
+    #             cur_artist = ' '.join(line[1:])
+    #             continue
+    #         if line[0] == "@":
+    #             cur_genre = ' '.join(line[1:])
+    #             continue
 
-            if not exists(f'{MUSIC_DIR}/{line[0]}/.done'):
-                dl_playlist(f'https://www.youtube.com/playlist?list={line[1]}', line[0], cur_artist, cur_genre)
-            else:
-                green(f"{line[0]} is already downloaded.")
+    #         if not exists(f'{MUSIC_DIR}/{line[0]}/.done'):
+    #             dl_playlist(f'https://www.youtube.com/playlist?list={line[1]}', line[0], cur_artist, cur_genre)
+    #         else:
+    #             green(f"{line[0]} is already downloaded.")
 
-# print(fetch_playlist_video_urls("https://music.youtube.com/playlist?list=OLAK5uy_nQaTI4Z5dutP0hjCfkm8RUcf7y6cWvQXE"))
 
-# youtube_dl.YoutubeDL({
-#         'cookiefile': COOKIES_FILE,
-#         'quiet': False,
-#     }).extract_info("https://music.youtube.com/playlist?list=OLAK5uy_n44e6U_lE64sQiG9rUL9viwHgBcESLqHE")
-# options = {
-#     'quiet': False,
-#     'extractaudio': True,
-#     'format': 'bestaudio/opus',
-
-#     # 'postprocessors': [{
-#     #     'key': 'FFmpegExtractAudio',
-#     #     'preferredcodec': 'mp3',
-#     #     'preferredquality': '320'
-#     # }],
-#     # 'postprocessor_args': [
-#     #     '-ar', '16000'
-#     # ],
-#     # 'prefer_ffmpeg': True,
-
-#     'keepvideo': False,
-#     'outtmpl': f"aaa.webm",
-#     'cookiefile': '/home/tuma/cookies.txt'
-
-# }
-
-# with youtube_dl.YoutubeDL(options) as ydl:
-#     ydl.download(['https://music.youtube.com/watch?v=EsqnrHrzLVA'])
-# yt=YouTube('https://music.youtube.com/watch?v=EsqnrHrzLVA&feature=share', use_oauth=True)
-# t=yt.streams.filter(only_audio=True).all()
-# t[0].download('tst.mp3')
 
 # driver = webdriver.Firefox()
 # d = driver.get('https://music.youtube.com/search?q=TOHO_BOSSA_NOVA_3')
