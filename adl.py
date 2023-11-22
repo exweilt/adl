@@ -47,6 +47,24 @@ class SongOptions:
     track_number: int   = None
     total_tracks: int   = None
 
+def replace_unallowed_symbols(filename):
+    unallowed_symbols = {
+        '<': '(',
+        '>': ')',
+        ':': '-',
+        '"': '\'',
+        '/': '_',
+        '\\': '_',
+        '|': '_',
+        '?': ';',
+        '*': '\''
+    }
+    replaced_filename = filename
+
+    for symbol, replacement in unallowed_symbols.items():
+        replaced_filename = replaced_filename.replace(symbol, replacement)
+
+    return replaced_filename
 
 def get_cover_url(playlist_id):
     with urlopen(f'https://music.youtube.com/playlist?list={playlist_id}') as res:
@@ -65,7 +83,7 @@ def process_song(options: SongOptions):
         image.save(output, format="JPEG")
         image_bytes = output.getvalue()
     
-    audio_file = MP4(f'{MUSIC_DIR}/{options.album_foldername}/{options.track_number}. {options.title}.m4a')
+    audio_file = MP4(f"{MUSIC_DIR}/{options.album_foldername}/{options.track_number}. {replace_unallowed_symbols(options.title)}.m4a")
 
     audio_file['covr'] = [
         MP4Cover(image_bytes, imageformat=MP4Cover.FORMAT_JPEG)
@@ -140,8 +158,10 @@ def download_song(song: SongOptions):
     Console.info(f"Downloading {song.track_number}. {song.title}")
 
     # Hotfix - yt-dlp cant download from music.youtube with ydl.download (music.youtube is needed because of 141 format 256kbs)
-    command_str = f'yt-dlp -f 141 -o "{MUSIC_DIR}/{song.album_foldername}/{song.track_number}. {song.title}.m4a" "https://music.youtube.com/watch?v={song.id}" --cookies="{COOKIES_FILE}" --quiet'
+    command_str = f'yt-dlp -f 141 -o "{MUSIC_DIR}/{song.album_foldername}/{song.track_number}. {replace_unallowed_symbols(song.title)}.m4a" "https://music.youtube.com/watch?v={song.id}" --cookies="{COOKIES_FILE}" --quiet'
     execute_command(command_str)
+
+    
 
     Console.green(f'{song.track_number}. {song.title} downloaded')
 
@@ -222,20 +242,32 @@ def interprete_list(lines):
         if line_words[0] == "@":
             current_genre = ' '.join(line_words[1:])
             continue
+        # Stop
+        if line_words[0] == "STOP":
+            return
+                
         
         # Otherwise download entry
         if not check_playlist_download_state(line_words[0]):
             options = SongOptions(album_foldername=line_words[0], album_id=line_words[1], artist=current_artist, genre=current_genre)
+
+            # Fetch other options from line
+            args = []
             if len(line_words) >= 3:
-                options.year = line_words[2]
+                args = line_words[2:]
+                for opt in args:
+                    if "year:" in opt:
+                        options.year = opt.split(":")[1]
+
             dl_playlist(options)
         else:
-            Console.green(f"{line[0]} is already downloaded.")
+            Console.green(f"{line_words[0]} is already downloaded.")
 
 
 if __name__ == "__main__":
     with open(LIST_FILE, 'r') as reader:
         lines = reader.read().split('\n')
         interprete_list(lines)
+        Console.green("Downloaded all successfully!")
 
 # process_song(f'{MUSIC_DIR}/TOHO_BOSSA_NOVA_1/1. furifuri ojousama.m4a', album_id="OLAK5uy_l06YRyzdC4euFmkFiE8zujhFvyVv2GZTQ", artist_name="ShibayanRecords", album_name="TOHO BOSSA NOVA 1", genre="Bossa Nova", title="furifuri ojousama", track_number=1, total_tracks=10, year="2012")

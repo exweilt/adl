@@ -1,28 +1,36 @@
 # ShibayanRecords
-@ Bossa Nova/Japanese
-TOHO_BOSSA_NOVA_1 OLAK5uy_l06YRyzdC4euFmkFiE8zujhFvyVv2GZTQ
-" TOHO_BOSSA_NOVA_2 OLAK5uy_nQaTI4Z5dutP0hjCfkm8RUcf7y6cWvQXE
-" TOHO_BOSSA_NOVA_3 OLAK5uy_l1yIUI4IHs_ujvew45_1EhaCjfsNHcEMc
-" TOHO_BOSSA_NOVA_4 OLAK5uy_mH1HKEFgBwoROYR49oyFjRHKJSojZCWQc 
-" TOHO_BOSSA_NOVA_5 OLAK5uy_ntfz4q8DGIkrZmyCDmY8vDpRoofywRoKc 
-TOHO_BOSSA_NOVA_11 OLAK5uy_njZWu6IWlwFhMyr2-w4bdmSWO_bCWA4HI
+@ Bossa_Nova Japanese
+TOHO_BOSSA_NOVA_1 OLAK5uy_l06YRyzdC4euFmkFiE8zujhFvyVv2GZTQ year:2012
+TOHO_BOSSA_NOVA_2 OLAK5uy_nQaTI4Z5dutP0hjCfkm8RUcf7y6cWvQXE year:2013
+TOHO_BOSSA_NOVA_3 OLAK5uy_l1yIUI4IHs_ujvew45_1EhaCjfsNHcEMc year:2014
+TOHO_BOSSA_NOVA_4 OLAK5uy_mH1HKEFgBwoROYR49oyFjRHKJSojZCWQc year:2015
+TOHO_BOSSA_NOVA_5 OLAK5uy_ntfz4q8DGIkrZmyCDmY8vDpRoofywRoKc year:2016
+TOHO_BOSSA_NOVA_6 OLAK5uy_n3hGCYeZVUYZ38GCBBwLXhw7mYR-ouP_E year:2017
+TOHO_BOSSA_NOVA_7 OLAK5uy_nXnqHeiLb7PA_I6Yv5e_mJmEzb-CyssNU year:2018
+TOHO_BOSSA_NOVA_8 OLAK5uy_miixRJpUsaROaVNs7z2Pon-M_Ozhorx9g year:2019
+TOHO_BOSSA_NOVA_9 OLAK5uy_k6i0sNeoK2jdQTgl8cARZ2fSIjpBn2-i4 year:2020 priority:low
+TOHO_BOSSA_NOVA_10 OLAK5uy_kjIfaYWxQSMNNIP856YVQH9mPB3wqGR2g year:2021
+TOHO_BOSSA_NOVA_11 OLAK5uy_njZWu6IWlwFhMyr2-w4bdmSWO_bCWA4HI year:2022 priority:low
+TOHO_BOSSA_NOVA_12 OLAK5uy_majTgY3H1ydm455mnqAyZMZtdnzKgsd_k year:2023
 
-# Jerico's Law
-@ Electronic/Instrumental/Touhou
-Unexpected_Evolution OLAK5uy_n3tXF6SFV4uykF1A4Rs4u4PePU_bPPVAI
-Postmortem_Examination OLAK5uy_nUdwqjrckwAKora4EtbcRhBwWnf8ImefA
-Electric_Creation OLAK5uy_l2Ezq2cWeRlcyuI_BjnXsW9oo3DzDea98
-
-# TAMUSIC
-@ Instrumental/Touhou
-Toho_String_Quartet OLAK5uy_nAQHXi3rk2caoi1MTjyhDvHB0U0RucWII
+# Antonio Carlos Jobim
+@ Bossa_Nova
+Tide OLAK5uy_nZO2mdXqyz6ZQmM3LRy1bMys1O4sxdye8 year:1970
+Wave OLAK5uy_mMP_Lfy2IRk0Cw-prxQaEv9y2y-yVIURM year:1967
+Apresenta OLAK5uy_kcSTp6AkXgcNGSrxLQaoxADGDRKUGxiAc year:1966
+Jobim OLAK5uy_nlKCitijYCB7G5TMpQZtJGCsemM4FBZ_4 year:1973
+Composer OLAK5uy_k-kMvaCgXzk1IOJR9t1lnyhqbYz8CjPx4
+Matita_Pere OLAK5uy_k8r-WxSPVuWvL4K392i8qXOJenNHA81FY year:1972
+Love_Strings_And_Jobim OLAK5uy_n5vN-f6-gIufxpdGt2ZFZCOrUYSa_zqjM
 
 # Crimson King
-@ Progressive Rock/Rock/English/
-In_the_Court_of_the_Crimson_King OLAK5uy_mn3nGCuhLkLTBh4_ZVGahac7wliftKY0E
+@ Progressive_Rock Rock
+In_the_Court_of_the_Crimson_King OLAK5uy_mn3nGCuhLkLTBh4_ZVGahac7wliftKY0E year:1969
+The_Condensed_21_Centrury_Guide OLAK5uy_lxlVeTXuuh8JZ2C5G1DjfWPqhBtlkGqJA
+Discipline OLAK5uy_meajljVd0pF9e4wtteDidng-oBOsSwKVA year:1981
 
 # Kraftwerk
-@ Electronic/Synthpop/Electro
+@ Electronic Synthpop Electro
 Radioactivity OLAK5uy_kFSX5HaJmfYhlcZ9Nkw7pAKrog0xhKSYI
 Autobahn OLAK5uy_nWEtLPH-oF0BCqodrYPyfoEnJmDhHDDAM
 " * -1,-2 Krautrock
@@ -36,18 +44,62 @@ The_Mix OLAK5uy_miA5f-xRKcLLjTrnJZ5P7jfgqMQIg_g7g
 3D_der_Katalog OLAK5uy_kl4ZKCK4XMTaJfH4J42AtKvXxffaymqnE
 
 
-# DDT
-@ Russian Rock/Russian
-Actrissa_Vesna OLAK5uy_l4gVnRLzHpg0oPhRUffyv2fxgAwsFPjZQ
-
 # АукцЫон
-@ Russian Rock/Russian/Art-Rock/Alternative Rock/Experimental
+@ Russian_Rock Russian Art-Rock Alternative_Rock Experimental
 Kak_ya_Stal_Predatelem OLAK5uy_lJzHOPx1MGLcP3zUkAxEz38WkNkxlB4lI
 Ptiza OLAK5uy_kDZBYIboyFfvYQSnHPM5MrxTrnghvz0aA
 Bodun OLAK5uy_l_be4UjVBoqwplaweG9BuPv0uWNfPG9lE
+Dreams OLAK5uy_mcNrv0OMf2XFUnIB1vKSv8xS3Ro0HwzkQ
+Girls_Sing OLAK5uy_noVcwpLIpfbBh9H1V_reGluhq7FTuR2gY
+Ula OLAK5uy_nQaQBPFxFwd8tB9gnni9G98iAg4ozpQ_g
+Na_Solnce OLAK5uy_nsO7ZkiBn0KkbrfdjeHP59D3ZZJfhaxT0
+Jilec_Vershin OLAK5uy_k_Cwq2LHZ58hWHU5ssDrAqKxrAuaLFUSk
+Jopa OLAK5uy_nuq_C4E6A--perNvUHdmxEEZHCzS4rDcU
+
+# Blue Öyster Cult
+@ Rock
+Blue_Oyster_Cult OLAK5uy_nggn7Ak6-_grZmb3TR0cR_vgOmBU7Tpo8
+Tyrrany_and_Mutation OLAK5uy_nERtBXa8HZmUd3ql0kQPx88vT6XxqGRZE
+Secret_Treaties OLAK5uy_l3J4YNryUQUA0p7UHNBOFLEeW0XHmp9w0
+Cultosaurus_Erectus OLAK5uy_kiS9DpXMz7ha-vM-VoMvL0mYs5nZQgfWo
+Fire_of_Unknown_Origin OLAK5uy_kcMU1ER3dD2JNr4aZJbatuq1u-tQyyu8g
+Agents_Of_Fortune OLAK5uy_maJ89PUikbCRtDJKbh-BifIeJ-XDJL-BQ
+Spectres OLAK5uy_kKwBG_57Hm331EdVW1sGMhn380OK5OPho
+Mirrors OLAK5uy_lE1LAPE-hzUlI1jgjEMvtadpPts3zYM8Y
+Club_Ninja OLAK5uy_l7SehBHGpoRxwkzBCE-DIGQLnDzLcayKk
+The_Revolution_By_Night OLAK5uy_naz2gBaX9E2W8TS0XZ-r00wu7lV-6JZXc
+The_Symbol_Remains OLAK5uy_nAgaNeeTVZu3x9uBmmso2L5l3IHsOr7eM
+
+STOP
+
+# Metallica
+@ Metal Trash_Metal
+Kill_em_All OLAK5uy_m-35U84Nfew9lXmlFNJD_DStZacRYoqWo
+Ride_the_Lighting OLAK5uy_nMi553Un-V3VCacIvHuLPUgXfEdPmHaP8
+And_Justice_for_All OLAK5uy_nIDGlbzOP5Y7eHdarScFKVlCKk39qf36M
+Metallica OLAK5uy_mcL5K5E9IHM5GPQ-8AyzPM7JgQMMn1uhs
+Master_of_Puppets OLAK5uy_lSza7aA85vMKSEiQ0wDr1nkAXpwO80x9Q
+Hardwired_to_selfdestruct OLAK5uy_mXl3Ah_8a1uyn2h7w9qd4EHF4ggjFYWuQ
+Death_Magnetic OLAK5uy_lIZirsnSbg41CX1xYgibpRhMlZWOwb1LM
+St_Anger OLAK5uy_lLZbgZsZ40ofzOWIN2c3vqKMlhD3FcTxQ
+Load OLAK5uy_lUIhXDOiqr2wdqy-GIzBJBGcaNe8smO38
+Reload OLAK5uy_kQOIakwdvoPD1skyFHT-EQKXQU1e7rGqw
+72_Seasons OLAK5uy_kLk0UGq8D3BWN6qOHgYQE_DogrfCZ2p4Y
+Garage_Inc OLAK5uy_mL0ShaXq59oPQsalZpHrzMRMKpeyL7phI
+
+# Jerico's Law
+@ Electronic Instrumental Touhou
+Unexpected_Evolution OLAK5uy_n3tXF6SFV4uykF1A4Rs4u4PePU_bPPVAI
+Postmortem_Examination OLAK5uy_nUdwqjrckwAKora4EtbcRhBwWnf8ImefA
+Electric_Creation OLAK5uy_l2Ezq2cWeRlcyuI_BjnXsW9oo3DzDea98
+
+# TAMUSIC
+@ Instrumental Touhou
+Toho_String_Quartet OLAK5uy_nAQHXi3rk2caoi1MTjyhDvHB0U0RucWII
+
 
 # TamaOnSen
-@ Instrumental/Japanese/Touhou/Chill
+@ Instrumental Japanese Touhou Chill
 Tamaoke OLAK5uy_kXJEJumP6U1jOqd35uxzXz5mprz4t1Doc
 Tamaoke_2 OLAK5uy_lsl-7LHxpPQEZ0J7_VMr0ylleygDJtGKc
 
@@ -55,4 +107,8 @@ Tamaoke_2 OLAK5uy_lsl-7LHxpPQEZ0J7_VMr0ylleygDJtGKc
 @ Electronic
 " Silver_Siren_Collection OLAK5uy_mtKpC2qlM_mqodQTo2ZIk2xPFWlh3KYoc
 " Booster OLAK5uy_lZBxcpNyU8ZK1epSbHzZ4THBnXTL-xbYc
+
+# DDT
+@ Russian_Rock Russian
+Actrissa_Vesna OLAK5uy_l4gVnRLzHpg0oPhRUffyv2fxgAwsFPjZQ
 
